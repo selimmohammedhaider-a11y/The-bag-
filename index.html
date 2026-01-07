@@ -3,75 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE BAG | Handcrafted Luxury</title>
+    <title>THE BAG</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        body { background-color: #ffffff; color: #000; overflow-x: hidden; }
-        body.rtl { direction: rtl; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; position: sticky; top: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(15px); z-index: 100; border-bottom: 1px solid #eee; }
-        .logo-text { font-size: 2rem; font-weight: 900; text-transform: uppercase; cursor: pointer; }
-        .cart-btn { cursor: pointer; font-weight: bold; background: #000; color: #fff; padding: 12px 24px; border-radius: 50px; }
-        .hero { padding: 120px 5% 80px 5%; text-align: center; }
-        .hero h1 { font-size: 10vw; text-transform: uppercase; line-height: 0.8; letter-spacing: -4px; }
-        .shop { padding: 40px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; }
-        .product { text-align: center; position: relative; cursor: pointer; }
-        .img-container { overflow: hidden; border-radius: 12px; margin-bottom: 20px; aspect-ratio: 1 / 1; background: #f9f9f9; }
-        .product img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        .product:hover img { transform: scale(1.05); }
-        .price-tag { font-weight: bold; margin-top: 10px; }
-        .old-price { text-decoration: line-through; color: #aaa; margin-right: 10px; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.15); backdrop-filter: blur(10px); }
-        .modal-content { margin: 10vh auto; padding: 30px; width: 90%; max-width: 420px; background: #fff; border-radius: 20px; text-align: center; }
-        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; text-align: left; }
-        .cart-item-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
-        .btn-black { background: #000; color: #fff; padding: 18px; border: none; border-radius: 50px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #eee; border-radius: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background: #fff; text-align: center; }
+        nav { display: flex; justify-content: space-between; padding: 20px 5%; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 10; }
+        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; }
+        .hero { padding: 60px 20px; }
+        .shop { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 20px 5%; }
+        .product { cursor: pointer; transition: 0.3s; }
+        .product:hover { transform: translateY(-5px); }
+        .product img { width: 100%; border-radius: 15px; background: #f9f9f9; aspect-ratio: 1/1; object-fit: cover; }
+        .price { font-weight: bold; margin-top: 10px; color: #d32f2f; }
+        .old { text-decoration: line-through; color: #aaa; margin-right: 10px; font-weight: normal; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; backdrop-filter: blur(5px); }
+        .modal-content { background: #fff; margin: 5vh auto; padding: 25px; width: 90%; max-width: 400px; border-radius: 20px; max-height: 90vh; overflow-y: auto; }
+        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cart-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
+        .btn { background: #000; color: #fff; padding: 15px; width: 100%; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; text-transform: uppercase; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; }
     </style>
 </head>
 <body>
-
-    <nav><div class="logo-text">THE BAG</div><div class="cart-btn" onclick="openCart()">Cart (<span id="count">0</span>)</div></nav>
-
-    <header class="hero"><h1>THE BAG</h1><p>made to carry the moment</p></header>
+    <nav><div class="logo">THE BAG</div><div onclick="openCart()" style="cursor:pointer; font-weight:bold;">Cart (<span id="count">0</span>)</div></nav>
+    <div class="hero"><h1>THE BAG</h1><p>Luxury Handcrafted Bags</p></div>
 
     <div class="shop">
-        <div class="product" onclick="openProduct('9544A993-B04E-46EB-9723-184ECF0990E4.PNG', 'Signature Mask', '600 EGP')">
-            <div class="img-container"><img src="9544A993-B04E-46EB-9723-184ECF0990E4.PNG"></div>
-            <h3>Signature Mask</h3><p class="price-tag"><span class="old-price">700 EGP</span> 600 EGP</p>
+        <div class="product" onclick="openP('9544A993-B04E-46EB-9723-184ECF0990E4.PNG', 'Signature Mask', '600 EGP')">
+            <img src="9544A993-B04E-46EB-9723-184ECF0990E4.PNG"><h3>Signature Mask</h3><p class="price"><span class="old">700 EGP</span>600 EGP</p>
         </div>
-        <div class="product" onclick="openProduct('Photoroom_20251227_224758.PNG', 'Chevron Peak', '900 EGP')">
-            <div class="img-container"><img src="Photoroom_20251227_224758.PNG"></div>
-            <h3>Chevron Peak</h3><p class="price-tag"><span class="old-price">1300 EGP</span> 900 EGP</p>
+        <div class="product" onclick="openP('Photoroom_20251227_224758.PNG', 'Chevron Peak', '900 EGP')">
+            <img src="Photoroom_20251227_224758.PNG"><h3>Chevron Peak</h3><p class="price"><span class="old">1300 EGP</span>900 EGP</p>
         </div>
-        <div class="product" onclick="openProduct('Photoroom_20251226_214602.PNG', 'Rose Classic', '900 EGP')">
-            <div class="img-container"><img src="Photoroom_20251226_214602.PNG"></div>
-            <h3>Rose Classic</h3><p class="price-tag"><span class="old-price">1300 EGP</span> 900 EGP</p>
+        <div class="product" onclick="openP('Photoroom_20251226_214602.PNG', 'Rose Classic', '900 EGP')">
+            <img src="Photoroom_20251226_214602.PNG"><h3>Rose Classic</h3><p class="price"><span class="old">1300 EGP</span>900 EGP</p>
         </div>
-        <div class="product" onclick="openProduct('Photoroom_20251226_214200.PNG', 'Ochre Wave', '900 EGP')">
-            <div class="img-container"><img src="Photoroom_20251226_214200.PNG"></div>
-            <h3>Ochre Wave</h3><p class="price-tag"><span class="old-price">1300 EGP</span> 900 EGP</p>
+        <div class="product" onclick="openP('Photoroom_20251226_214200.PNG', 'Ochre Wave', '900 EGP')">
+            <img src="Photoroom_20251226_214200.PNG"><h3>Ochre Wave</h3><p class="price"><span class="old">1300 EGP</span>900 EGP</p>
         </div>
-        <div class="product" onclick="openProduct('Photoroom_20251226_210333.PNG', 'Midnight Duo', '900 EGP')">
-            <div class="img-container"><img src="Photoroom_20251226_210333.PNG"></div>
-            <h3>Midnight Duo</h3><p class="price-tag"><span class="old-price">1300 EGP</span> 900 EGP</p>
+        <div class="product" onclick="openP('Photoroom_20251226_210333.PNG', 'Midnight Duo', '900 EGP')">
+            <img src="Photoroom_20251226_210333.PNG"><h3>Midnight Duo</h3><p class="price"><span class="old">1300 EGP</span>900 EGP</p>
         </div>
-        <div class="product" onclick="openProduct('Photoroom_20251226_220111.PNG', 'Sand Shell', '900 EGP')">
-            <div class="img-container"><img src="Photoroom_20251226_220111.PNG"></div>
-            <h3>Sand Shell</h3><p class="price-tag"><span class="old-price">1300 EGP</span> 900 EGP</p>
+        <div class="product" onclick="openP('Photoroom_20251226_220111.PNG', 'Sand Shell', '900 EGP')">
+            <img src="Photoroom_20251226_220111.PNG"><h3>Sand Shell</h3><p class="price"><span class="old">1300 EGP</span>900 EGP</p>
         </div>
     </div>
 
-    <div id="productModal" class="modal"><div class="modal-content"><p onclick="closeAll()" style="text-align:right;cursor:pointer">✕</p><img id="mImg" style="width:100%;border-radius:10px"><h2 id="mTitle"></h2><p id="mPrice"></p><button class="btn-black" onclick="addToCart()">Add To Cart</button></div></div>
-    <div id="cartModal" class="modal"><div class="modal-content"><h2>YOUR CART</h2><div id="cartList"></div><button class="btn-black" onclick="openCheckout()">Complete Order</button></div></div>
-    <div id="checkoutModal" class="modal"><div class="modal-content"><h2>SHIPPING</h2><form action="https://formspree.io/f/meeoyklk" method="POST"><input type="hidden" name="Order" id="hCart"><input name="Name" placeholder="Name" required><input name="Phone" placeholder="Phone" required><button type="submit" class="btn-black">Send Order</button></form></div></div>
+    <div id="pModal" class="modal"><div class="modal-content"><p onclick="closeAll()" style="text-align:right;cursor:pointer">✕</p><img id="mImg" style="width:100%; border-radius:15px;"><h2 id="mName" style="margin-top:15px"></h2><p id="mPrice" class="price"></p><button class="btn" onclick="add()">Add To Cart</button></div></div>
+    
+    <div id="cModal" class="modal"><div class="modal-content"><h2>YOUR CART</h2><div id="cList" style="margin:20px 0;"></div><button class="btn" onclick="check()">Complete Order</button></div></div>
+    
+    <div id="shModal" class="modal"><div class="modal-content"><h2>SHIPPING</h2>
+        <form action="https://formspree.io/f/meeoyklk" method="POST">
+            <input type="hidden" name="Order_Details" id="hCart">
+            <input name="Full_Name" placeholder="Full Name (الاسم بالكامل)" required>
+            <input name="Primary_Phone" placeholder="Phone Number (رقم الهاتف)" required>
+            <input name="Secondary_Phone" placeholder="Second Phone (رقم هاتف إضافي)">
+            <select name="Governorate" required>
+                <option value="" disabled selected>Select Governorate (المحافظة)</option>
+                <option>Cairo</option><option>Giza</option><option>Alexandria</option><option>Dakahlia</option><option>Sharkia</option>
+                <option>Qalyubia</option><option>Beheira</option><option>Gharbia</option><option>Fayoum</option><option>Monufia</option>
+                <option>Ismailia</option><option>Suez</option><option>Port Said</option><option>Asyut</option><option>Sohag</option>
+                <option>Minya</option><option>Aswan</option><option>Luxor</option><option>Qena</option><option>Beni Suef</option>
+                <option>Damietta</option><option>Kafr el-Sheikh</option><option>Matruh</option><option>Red Sea</option>
+            </select>
+            <input name="Detailed_Address" placeholder="Address (العنوان بالتفصيل)" required>
+            <button type="submit" class="btn">Confirm Order</button>
+        </form>
+    </div></div>
 
     <script>
         let cart = []; let cur = {};
-        function openProduct(img, name, price) { cur = {img, name, price}; document.getElementById('mImg').src = img; document.getElementById('mTitle').innerText = name; document.getElementById('mPrice').innerText = price; document.getElementById('productModal').style.display = "block"; }
-        function addToCart() { cart.push(cur); document.getElementById('count').innerText = cart.length; closeAll(); }
-        function openCart() { const l = document.getElementById('cartList'); l.innerHTML = ""; cart.forEach(i => { l.innerHTML += `<div class="cart-item"><img src="${i.img}" class="cart-item-img"><div><b>${i.name}</b><br>${i.price}</div></div>`; }); document.getElementById('cartModal').style.display = "block"; }
-        function openCheckout() { document.getElementById('hCart').value = cart.map(i => i.name).join(", "); closeAll(); document.getElementById('checkoutModal').style.display = "block"; }
-        function closeAll() { document.querySelectorAll('.modal').forEach(m => m.style.display = "none"); }
+        function openP(img, name, price) { cur={img, name, price}; document.getElementById('mImg').src=img; document.getElementById('mName').innerText=name; document.getElementById('mPrice').innerText=price; document.getElementById('pModal').style.display='block'; }
+        function add() { cart.push(cur); document.getElementById('count').innerText=cart.length; closeAll(); }
+        function openCart() { 
+            let l=document.getElementById('cList'); l.innerHTML=""; 
+            if(cart.length==0) { l.innerHTML="Cart is empty"; }
+            cart.forEach(i=> l.innerHTML+=`<div class="cart-item"><img src="${i.img}"><div><b>${i.name}</b><br>${i.price}</div></div>`); 
+            document.getElementById('cModal').style.display='block'; 
+        }
+        function check() { 
+            if(cart.length==0) return;
+            document.getElementById('hCart').value=cart.map(i=>i.name).join(", "); 
+            closeAll(); document.getElementById('shModal').style.display='block'; 
+        }
+        function closeAll() { document.querySelectorAll('.modal').forEach(m=>m.style.display='none'); }
     </script>
 </body>
 </html>
